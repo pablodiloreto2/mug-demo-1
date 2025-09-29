@@ -17,8 +17,8 @@ if (!defined('ABSPATH')) {
 
 function hola_copilot_shortcode() {
     $output = '<div class="hola-copilot-saludo">';
-    $output .= '¡Hola! 👋 Soy GitHub Copilot, tu asistente de programación. ';
-    $output .= '¡Bienvenido a esta increíble demo! 🚀';
+    $output .= '¡Hola MUG! 👋 Te saludo desde GitHub Codespaces. ';
+    $output .= '¡Bienvenido a esta increíble clase de programación! 🚀';
     $output .= '</div>';
 
     // Agregamos estilos inline para el mensaje
