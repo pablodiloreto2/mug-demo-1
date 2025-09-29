@@ -81,6 +81,41 @@ Plugin de demostración que implementa un shortcode para mostrar un saludo anima
 4. El acceso a WordPress está configurado para HTTPS en Codespaces
 5. La instalación de plugins/temas está habilitada (FS_METHOD direct)
 
+## Convenciones de Commits
+
+Los commits deben ser en español y usar emojis para mejorar la legibilidad y expresividad. Copilot ayudará a generar mensajes de commit significativos basados en los cambios realizados.
+
+### Estructura del mensaje
+```
+<emoji> <tipo>: <mensaje descriptivo en español>
+
+[cuerpo del commit en español si es necesario]
+```
+
+### Tipos de Commits y sus Emojis
+- 🎨 `estilo`: Cambios de formato, CSS, UI/UX
+- ✨ `feat`: Nueva funcionalidad
+- 🐛 `fix`: Corrección de bugs
+- 📝 `docs`: Cambios en documentación
+- ♻️ `refactor`: Refactorización de código
+- 🚀 `perf`: Mejoras de rendimiento
+- ✅ `test`: Agregando o modificando tests
+- 🔧 `config`: Cambios de configuración
+- 🔐 `seguridad`: Relacionado con seguridad
+- 🌐 `i18n`: Internacionalización y traducciones
+- 🚧 `wip`: Trabajo en progreso
+- 🔄 `ci`: Cambios en CI/CD
+- 📦 `deps`: Actualizaciones de dependencias
+- 🗃️ `db`: Cambios relacionados con la base de datos
+
+### Ejemplos
+```
+✨ feat: Añadir shortcode [hola_copilot] para mostrar saludo animado
+🐛 fix: Corregir redirección en Codespaces para instalación de WordPress
+🔧 config: Actualizar configuración de Docker para desarrollo local
+📝 docs: Agregar instrucciones de instalación en README
+```
+
 ## Tareas Comunes
 
 1. Reiniciar contenedores:
