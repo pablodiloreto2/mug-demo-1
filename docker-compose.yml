@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  wordpress:
+    image: wordpress:fpm
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_DB_NAME: wp
+      WORDPRESS_CONFIG_EXTRA: |
+          $$host = $$_SERVER['HTTP_X_FORWARDED_HOST'] ?? $$_SERVER['HTTP_HOST'];
+          $$host = preg_replace('/:\d+$$/', '', $$host);
+          // Normalizar server vars para Codespaces
+          $$_SERVER['HTTP_HOST'] = $$host;
+          $$_SERVER['SERVER_NAME'] = $$host;
+          $$_SERVER['HTTPS'] = 'on';
+          $$_SERVER['HTTP_X_FORWARDED_PROTO'] = 'https';
+          $$_SERVER['HTTP_X_FORWARDED_PORT'] = '8080';
+          $$_SERVER['SERVER_PORT'] = 8080;
+          // URLs base correctas
+          define('WP_HOME',    'https://' . $$host);
+          define('WP_SITEURL', 'https://' . $$host);
+          // Configuración de sistema de archivos para desarrollo
+          define('FS_METHOD', 'direct');
+    volumes:
+      - wordpress:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
+    depends_on:
+      - db
+    networks:
+      - wordpress-network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - wordpress:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
+    depends_on:
+      - wordpress
+    networks:
+      - wordpress-network
+
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=wp
+      - MYSQL_USER=wp
+      - MYSQL_PASSWORD=wp
+      - MYSQL_ROOT_PASSWORD=rootpassword
+    networks:
+      - wordpress-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=wp
+      - PMA_PASSWORD=wp
+    depends_on:
+      - db
+    networks:
+      - wordpress-network
+
+volumes:
+  wordpress:
+
+networks:
+  wordpress-network:
+    driver: bridge

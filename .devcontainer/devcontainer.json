@@ -1,0 +1,29 @@
+{
+    "name": "WordPress Development",
+    "dockerComposeFile": "../docker-compose.yml",
+    "service": "wordpress",
+    "workspaceFolder": "/workspaces/mug-demo-1",
+    "postCreateCommand": "docker compose up -d",
+    "postStartCommand": "docker compose up -d",
+    "forwardPorts": [8080, 8081],
+    "portsAttributes": {
+        "8080": {
+            "label": "WordPress",
+            "onAutoForward": "notify"
+        },
+        "8081": {
+            "label": "phpMyAdmin",
+            "onAutoForward": "notify"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "formulahendry.auto-close-tag",
+                "formulahendry.auto-rename-tag",
+                "xdebug.php-debug"
+            ]
+        }
+    }
+}
