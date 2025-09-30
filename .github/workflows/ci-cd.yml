@@ -1,0 +1,47 @@
+# 👨‍🏫 Simulación de Despliegue para Estudiantes (Versión Visual)
+name: 'CI/CD: Build, Test, Deploy (Simulación Visual)'
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  # Este job simula todo el proceso de CI/CD
+  build-test-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: '➡️ 1. Checkout del Código'
+        uses: actions/checkout@v4
+
+      # --- FASE DE BUILD ---
+      - name: '🏗️ 2. Fase de Build (Construcción)'
+        run: |
+          echo "Iniciando la construcción del proyecto..."
+          echo "Esto simula la compilación, instalación de dependencias, etc."
+          sleep 30 # <-- ESPERA DE 30 SEGUNDOS
+          echo "✅ ¡Proyecto construido exitosamente!"
+
+      # --- FASE DE TEST ---
+      - name: '🧪 3. Fase de Test (Pruebas)'
+        run: |
+          echo "Iniciando la ejecución de pruebas automatizadas..."
+          echo "Simulando pruebas unitarias, de integración y funcionales."
+          sleep 30 # <-- ESPERA DE 30 SEGUNDOS
+          echo "✅ ¡Todas las pruebas han pasado!"
+
+      # --- FASE DE DEPLOY ---
+      - name: '🚀 4. Fase de Deploy (Despliegue a Staging)'
+        run: |
+          echo "Iniciando despliegue al entorno de pruebas (Staging)..."
+          echo "Conectando con el servidor, subiendo archivos..."
+          sleep 30 # <-- ESPERA DE 30 SEGUNDOS
+          echo "✅ ¡Desplegado en Staging correctamente!"
+
+      - name: '🎉 5. Fase de Deploy (Despliegue a Producción)'
+        run: |
+          echo "¡APROBADO! Iniciando despliegue final a Producción..."
+          echo "Este es el paso final. La nueva versión estará disponible para los usuarios."
+          sleep 30 # <-- ESPERA DE 30 SEGUNDOS
+          echo "✨ ¡Despliegue en Producción completado con ÉXITO!"
